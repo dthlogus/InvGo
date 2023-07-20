@@ -15,12 +15,7 @@ import (
 func ConnectDB() *mongo.Client {
 	godotenv.Load(".env")
 
-	Mongo_URL := fmt.Sprint("mongodb://%s:%s@%s:%s",
-		os.Getenv("MONGO_USER"),
-		os.Getenv("MONGO_PASSWORD"),
-		os.Getenv("MONGO_URL"),
-		os.Getenv("MONGO_PORT"),
-	)
+	Mongo_URL := os.Getenv("MONGODB_URL")
 	client, err := mongo.NewClient(options.Client().ApplyURI(Mongo_URL))
 
 	if err != nil {

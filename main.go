@@ -7,8 +7,9 @@ import (
 
 func main() {
 	router := gin.Default()
+	router.SetTrustedProxies(nil)
 
 	configs.ConnectDB()
 
-	router.Run("locahost:9081")
+	router.Run(":9081")
 }
