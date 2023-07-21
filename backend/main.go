@@ -12,6 +12,7 @@ func main() {
 	configs.ConnectDB()
 
 	routes.UserRoute(router)
+	routes.PerfilRoute(router)
 
 	router.Run(":9081")
 }

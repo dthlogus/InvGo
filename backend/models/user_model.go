@@ -1,8 +1,9 @@
 package models
 
 type User struct {
-	Username string `json:"username,omitempty" validate:"required"`
-	FullName string `json:"fullname,omitempty" validate:"required"`
-	Password string `json:"password,omitempty" validate:"required"`
-	Email    string `json:"email,omitempty" validate:"required"`
+	Username string `json:"username" validate:"required"`
+	FullName string `json:"fullname" validate:"required"`
+	Password string `json:"password" validate:"required"`
+	Email    string `json:"email" validate:"required"`
+	Perfil   Perfil `json:"perfil"`
 }
