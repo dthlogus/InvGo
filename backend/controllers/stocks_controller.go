@@ -25,11 +25,15 @@ func GetStocks() gin.HandlerFunc {
 		req.Header.Add("X-RapidAPI-Key", "dddcf7a2b2mshbbd05839cc265e0p1c7087jsn76cc414c5a76")
 		req.Header.Add("X-RapidAPI-Host", "yahoo-finance15.p.rapidapi.com")
 
-		res, _ := http.DefaultClient.Do(req)
+		res, err := http.DefaultClient.Do(req)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, responses.UserResponse{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
+			return
+		}
 		defer res.Body.Close()
 
 		var stockData []models.StockData
-		err := json.NewDecoder(res.Body).Decode(&stockData)
+		err = json.NewDecoder(res.Body).Decode(&stockData)
 
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, responses.UserResponse{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
