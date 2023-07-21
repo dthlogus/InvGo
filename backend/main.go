@@ -13,6 +13,7 @@ func main() {
 
 	routes.UserRoute(router)
 	routes.PerfilRoute(router)
+	routes.StocksRoute(router)
 
 	router.Run(":9081")
 }
