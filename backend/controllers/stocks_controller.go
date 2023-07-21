@@ -3,7 +3,6 @@ package controllers
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"time"
 
@@ -46,6 +45,5 @@ func GetStocks() gin.HandlerFunc {
 		c.JSON(http.StatusOK,
 			responses.UserResponse{Status: http.StatusOK, Message: "success", Data: map[string]interface{}{"data": stockDtos}},
 		)
-		fmt.Println(stockDtos)
 	}
 }
