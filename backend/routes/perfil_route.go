@@ -7,4 +7,6 @@ import (
 
 func PerfilRoute(router *gin.Engine) {
 	router.POST("/perfil/:userId", controllers.CreatePerfil())
+	router.PUT("/perfil/:userId", controllers.UpdatePerfil())
+	router.DELETE("/perfil/:userId", controllers.DeletePerfil())
 }
