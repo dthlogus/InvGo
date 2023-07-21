@@ -26,7 +26,11 @@ O projeto InvGo é um software que tem como objetivo coletar informações finan
 
  ## 🛠️ Como utilizar o projeto
 
- Antes de rodar o projeto tenha certeza que tenha instalado o [GIT](https://git-scm.com/), [GO](https://go.dev/) e o [Docker](https://docs.docker.com/get-docker/) em sua máquina caso não tinha você pode clicar nos links e será redirecionado para a página de instalação.
+ Antes de rodar o projeto tenha certeza que tenha instalado o [GIT](https://git-scm.com/), [GO](https://go.dev/) e o [Docker](https://docs.docker.com/get-docker/) em sua máquina caso não tenha você pode clicar nos links e será redirecionado para a página de instalação.
+
+ Não se também de adicionar um arquivo chamado ".env" na raiz do backend e acionar a seguintes váriaveis de ambiente.
+
+ - MONGODB_URL = `URL para acessar o banco de dados Mongo`
 
 Clone o projeto
 
