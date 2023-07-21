@@ -7,3 +7,10 @@ type User struct {
 	Email    string `json:"email" validate:"required"`
 	Perfil   Perfil `json:"perfil"`
 }
+
+type UserPresentation struct {
+	Username string `json:"username" validate:"required"`
+	FullName string `json:"fullname" validate:"required"`
+	Email    string `json:"email" validate:"required"`
+	Perfil   Perfil `json:"perfil"`
+}

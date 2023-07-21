@@ -39,6 +39,7 @@ func CreateUser() gin.HandlerFunc {
 			FullName: user.FullName,
 			Password: user.Password,
 			Email:    user.Email,
+			Perfil:   models.Perfil{},
 		}
 
 		result, err := userCollection.InsertOne(ctx, newUser)
@@ -55,7 +56,7 @@ func GetUser() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 		userId := c.Param("userId")
-		var user models.User
+		var user models.UserPresentation
 		defer cancel()
 
 		objId, _ := primitive.ObjectIDFromHex(userId)
@@ -95,7 +96,7 @@ func UpdateUser() gin.HandlerFunc {
 			return
 		}
 
-		var updateUser models.User
+		var updateUser models.UserPresentation
 		if result.MatchedCount == 1 {
 			err := userCollection.FindOne(ctx, bson.M{"_id": objId}).Decode(&updateUser)
 			if err != nil {
@@ -139,7 +140,7 @@ func DeleteUser() gin.HandlerFunc {
 func GetAllUser() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-		var users []models.User
+		var users []models.UserPresentation
 		defer cancel()
 
 		results, err := userCollection.Find(ctx, bson.M{})
@@ -151,7 +152,7 @@ func GetAllUser() gin.HandlerFunc {
 
 		defer results.Close(ctx)
 		for results.Next(ctx) {
-			var singleUser models.User
+			var singleUser models.UserPresentation
 			if err = results.Decode(&singleUser); err != nil {
 				c.JSON(http.StatusInternalServerError, responses.UserResponse{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
 			}

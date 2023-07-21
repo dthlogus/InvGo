@@ -20,7 +20,7 @@ func CreatePerfil() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 		var perfil models.Perfil
-		var user models.User
+		var user models.UserPresentation
 		userId := c.Param("userId")
 		defer cancel()
 		objId, _ := primitive.ObjectIDFromHex(userId)
@@ -71,7 +71,7 @@ func UpdatePerfil() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 		userId := c.Param("userId")
-		var user models.User
+		var user models.UserPresentation
 		var perfil models.Perfil
 		defer cancel()
 		objId, _ := primitive.ObjectIDFromHex(userId)
@@ -121,7 +121,7 @@ func DeletePerfil() gin.HandlerFunc {
 			return
 		}
 
-		var updateUser models.User
+		var updateUser models.UserPresentation
 		if result.MatchedCount == 1 {
 			err := userCollection.FindOne(ctx, bson.M{"_id": objId}).Decode(&updateUser)
 			if err != nil {
