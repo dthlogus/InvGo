@@ -2,9 +2,19 @@
 
 O projeto InvGo é um software que tem como objetivo coletar informações financeiras e realizar cálculos para fornecer informações relevantes, como PV (Valor Presente), PVP (Preço sobre Valor Patrimonial), DY (Dividend Yield) e outros. Ele foi projetado para ajudar os usuários a entender melhor suas finanças e tomar decisões informadas.
 
+## Indices
+
+- [InvGo API](#invgo-api)
+- [Índices](#indices)
+- [Status do projeto](#status-do-projeto)
+- [Funcionalidades do projeto escopo V-1.0](#funcionalidades-do-projeto-escopo-v-10)
+- [Como utilizar o projeto](#%EF%B8%8F-como-utilizar-o-projeto)
+- [Técnicas e tecnologias utilizadas](#%EF%B8%8F-técnicas-e-tecnologias-utilizadas)
+
+
 ## Status do projeto
 
-:construction: Projeto em fase de contrução e testes :construction
+:construction: Projeto em fase de contrução e testes :construction:
 
 ## Funcionalidades do projeto escopo V-1.0
 
@@ -49,3 +59,4 @@ Inicie o servidor
 - ``gin-gonic``
 - ``Mongodb``
 - ``Docker``
+- ``Postman``
