@@ -5,9 +5,10 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/dthlogus/InvGo/configs"
-	"github.com/dthlogus/InvGo/models"
-	"github.com/dthlogus/InvGo/responses"
+	"github.com/dthlogus/InvGo/backend/configs"
+	"github.com/dthlogus/InvGo/backend/models"
+	"github.com/dthlogus/InvGo/backend/responses"
+	"github.com/dthlogus/InvGo/backend/uteis"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"go.mongodb.org/mongo-driver/bson"
@@ -37,7 +38,7 @@ func CreateUser() gin.HandlerFunc {
 		newUser := models.User{
 			Username: user.Username,
 			FullName: user.FullName,
-			Password: user.Password,
+			Password: uteis.CreatedHash256(user.Password),
 			Email:    user.Email,
 			Perfil:   models.Perfil{},
 		}
@@ -74,10 +75,8 @@ func GetUser() gin.HandlerFunc {
 func UpdateUser() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-		userId := c.Param("userId")
-		var user models.User
+		var user models.UserUpdate
 		defer cancel()
-		objId, _ := primitive.ObjectIDFromHex(userId)
 
 		if err := c.BindJSON(&user); err != nil {
 			c.JSON(http.StatusBadRequest, responses.UserResponse{Status: http.StatusBadRequest, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
@@ -89,7 +88,9 @@ func UpdateUser() gin.HandlerFunc {
 			return
 		}
 
-		update := bson.M{"username": user.Username, "fullname": user.FullName, "password": user.Password, "email": user.Email}
+		objId, _ := primitive.ObjectIDFromHex(user.Id)
+
+		update := bson.M{"username": user.Username, "fullname": user.FullName, "password": uteis.CreatedHash256(user.Password), "email": user.Email}
 		result, err := userCollection.UpdateOne(ctx, bson.M{"_id": objId}, bson.M{"$set": update})
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, responses.UserResponse{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})

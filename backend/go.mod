@@ -1,4 +1,4 @@
-module github.com/dthlogus/InvGo
+module github.com/dthlogus/InvGo/backend
 
 go 1.20
 

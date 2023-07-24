@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/dthlogus/InvGo/configs"
-	"github.com/dthlogus/InvGo/models"
-	"github.com/dthlogus/InvGo/responses"
+	"github.com/dthlogus/InvGo/backend/configs"
+	"github.com/dthlogus/InvGo/backend/models"
+	"github.com/dthlogus/InvGo/backend/responses"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -70,16 +70,16 @@ func CreatePerfil() gin.HandlerFunc {
 func UpdatePerfil() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-		userId := c.Param("userId")
-		var user models.UserPresentation
+		var user models.UserUpdate
 		var perfil models.Perfil
 		defer cancel()
-		objId, _ := primitive.ObjectIDFromHex(userId)
 
 		if err := c.BindJSON(&perfil); err != nil {
 			c.JSON(http.StatusBadRequest, responses.UserResponse{Status: http.StatusBadRequest, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
 			return
 		}
+
+		objId, _ := primitive.ObjectIDFromHex(user.Id)
 
 		err := userCollection.FindOne(ctx, bson.M{"_id": objId}).Decode(&user)
 		if err != nil {

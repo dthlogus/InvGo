@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"github.com/dthlogus/InvGo/controllers"
+	"github.com/dthlogus/InvGo/backend/controllers"
 	"github.com/gin-gonic/gin"
 )
 

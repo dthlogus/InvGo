@@ -5,6 +5,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func StocksRoute(router *gin.Engine) {
-	router.GET("/stocks/:symbols", controllers.GetStocks())
+func AuthRoute(router *gin.Engine) {
+
+	router.POST("/auth/user", controllers.AuthenticateUser())
+
 }

@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/dthlogus/InvGo/models"
-	"github.com/dthlogus/InvGo/responses"
+	"github.com/dthlogus/InvGo/backend/models"
+	"github.com/dthlogus/InvGo/backend/responses"
 	"github.com/gin-gonic/gin"
 )
 
