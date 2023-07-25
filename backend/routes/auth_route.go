@@ -6,7 +6,6 @@ import (
 )
 
 func AuthRoute(router *gin.Engine) {
-
 	router.POST("/auth/user", controllers.AuthenticateUser())
 
 }

@@ -75,8 +75,11 @@ func GetUser() gin.HandlerFunc {
 func UpdateUser() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-		var user models.UserUpdate
+		var user models.User
+		userId := c.Param("userId")
 		defer cancel()
+
+		objId, _ := primitive.ObjectIDFromHex(userId)
 
 		if err := c.BindJSON(&user); err != nil {
 			c.JSON(http.StatusBadRequest, responses.UserResponse{Status: http.StatusBadRequest, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
@@ -87,8 +90,6 @@ func UpdateUser() gin.HandlerFunc {
 			c.JSON(http.StatusBadRequest, responses.UserResponse{Status: http.StatusBadRequest, Message: "error", Data: map[string]interface{}{"data": validationErr.Error()}})
 			return
 		}
-
-		objId, _ := primitive.ObjectIDFromHex(user.Id)
 
 		update := bson.M{"username": user.Username, "fullname": user.FullName, "password": uteis.CreatedHash256(user.Password), "email": user.Email}
 		result, err := userCollection.UpdateOne(ctx, bson.M{"_id": objId}, bson.M{"$set": update})
