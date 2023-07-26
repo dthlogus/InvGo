@@ -7,6 +7,7 @@ O projeto InvGo é um software que tem como objetivo coletar informações finan
 - [InvGo API](#invgo-api)
 - [Índices](#indices)
 - [Status do projeto](#status-do-projeto)
+- [Documentaçao](#documentação)
 - [Funcionalidades do projeto escopo V-1.0](#funcionalidades-do-projeto-escopo-v-10)
 - [Como utilizar o projeto](#%EF%B8%8F-como-utilizar-o-projeto)
 - [Técnicas e tecnologias utilizadas](#%EF%B8%8F-técnicas-e-tecnologias-utilizadas)
@@ -14,7 +15,11 @@ O projeto InvGo é um software que tem como objetivo coletar informações finan
 
 ## Status do projeto
 
-:construction: Projeto em fase de contrução e testes :construction:
+Atualmente V1.0
+
+## Documentação
+
+[Documentaça](https://documenter.getpostman.com/view/15824835/2s946pXoYv)
 
 ## Funcionalidades do projeto escopo V-1.0
 

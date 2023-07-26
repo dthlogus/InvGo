@@ -70,7 +70,8 @@ func CreatePerfil() gin.HandlerFunc {
 func UpdatePerfil() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-		var user models.UserUpdate
+		userId := c.Param("userId")
+		var user models.User
 		var perfil models.Perfil
 		defer cancel()
 
@@ -79,7 +80,7 @@ func UpdatePerfil() gin.HandlerFunc {
 			return
 		}
 
-		objId, _ := primitive.ObjectIDFromHex(user.Id)
+		objId, _ := primitive.ObjectIDFromHex(userId)
 
 		err := userCollection.FindOne(ctx, bson.M{"_id": objId}).Decode(&user)
 		if err != nil {
